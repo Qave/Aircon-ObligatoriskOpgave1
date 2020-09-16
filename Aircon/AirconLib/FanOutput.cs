@@ -15,15 +15,15 @@ namespace AirconLib
         /// When a new FanOutput object is created, initialize given arguments
         /// </summary>
         /// <param name="id">The ID of the current FanOutput object</param>
-        /// <param name="name">The name of the current FanOutput object</param>
-        /// <param name="temp">The temperature of the current FanOutput object</param>
-        /// <param name="humid">The humidity of the current FanOutput object</param>
+        /// <param name="name">The name of the current FanOutput object. Name cannot be less than 2 characters</param>
+        /// <param name="temp">The temperature of the current FanOutput object. Any number between 15 and 25</param>
+        /// <param name="humid">The humidity of the current FanOutput object. Any number between 30 and 80</param>
         public FanOutput(int id, string name, int temp, int humid)
         {
-            id = _id;
-            name = _name;
-            temp = Temp;
-            humid = _humidity;
+            _id = id;
+            _name = name;
+            _temp = temp;
+            _humidity = humid;
         }
 
         /// <summary>
@@ -44,14 +44,15 @@ namespace AirconLib
             get { return _name; }
             set
             {
-                if (_name.Length < 2)
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Name is null or empty");
+                }
+                else if (value.Length < 2)
                 {
                     throw new ArgumentOutOfRangeException("Name cannot be less than 2 characters.");
                 }
-                else
-                {
-                    _name = value;
-                }
+                _name = value;
             }
         }
         /// <summary>
@@ -64,7 +65,7 @@ namespace AirconLib
             get { return _temp; }
             set
             {
-                if (_temp < 15 || _temp > 25)
+                if (value < 15 || value > 25)
                 {
                     throw new ArgumentOutOfRangeException("Temperature must be between 15 and 25.");
                 }
@@ -84,7 +85,7 @@ namespace AirconLib
             get { return _humidity; }
             set
             {
-                if (_humidity < 30 || _humidity > 80)
+                if (value < 30 || value > 80)
                 {
                     throw new ArgumentOutOfRangeException("Humidity must be between 30 and 80.");
                 }
@@ -94,7 +95,5 @@ namespace AirconLib
                 }
             }
         }
-
-
     }
 }

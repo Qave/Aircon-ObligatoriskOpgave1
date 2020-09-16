@@ -95,5 +95,10 @@ namespace AirconLib
                 }
             }
         }
+
+        public override string ToString()
+        {
+            return $"Id: {Id}, Name: {Name}, Temperature {Temp}, Humidity: {Humidity}";
+        }
     }
 }

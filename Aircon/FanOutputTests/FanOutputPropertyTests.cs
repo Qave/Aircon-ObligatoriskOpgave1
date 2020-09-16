@@ -16,6 +16,13 @@ namespace FanOutputTests
         }
 
         [TestMethod]
+        public void TestObjectCreation()
+        {
+            FanOutput _testOutput2 = new FanOutput(2, "Kasper", 18, 60);
+            Assert.AreEqual("Id: 2, Name: Kasper, Temperature 18, Humidity: 60", _testOutput2.ToString());
+        }
+
+        [TestMethod]
         public void TestId()
         {
             Assert.AreEqual(1, _testOutput.Id);
